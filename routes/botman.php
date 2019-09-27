@@ -9,7 +9,13 @@ use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 
 $botman = resolve('botman');
 
-$botman->hears('START', function ($bot) {
+$botman->hears('AMAZONAUTH', function ($bot) {
+    $user = $bot->getUser();
+
+    $bot->reply('hi');
+});
+
+$botman->hears('Indítás', function ($bot) {
     $user = $bot->getUser();
 
     $bot->reply(ButtonTemplate::create('Kedves '. $user->getLastName() . ' ' . $user->getFirstName() .'!'. PHP_EOL . 
@@ -25,7 +31,7 @@ $botman->hears('START', function ($bot) {
             ->payload('Vizsga')
         )
         ->addButton(ElementButton::create('Tudnivalók')
-            ->url('http://botman.io/')
+            ->url('http://kresz.bot/')
         )
     );
 });
@@ -145,4 +151,26 @@ $botman->hears('Teszt befejezése', function ($bot) {
     }
 
     return $bot->reply('Jelenleg nincs aktív teszted, amit kiértékelhetnénk');
+});
+
+
+$botman->hears('Statisztikám', function ($bot) {
+    $user = $bot->getUser(); //User
+
+    $bot->reply('Kérlek várj, előkeresem és összegzem a gyakorlásaid, tesztjeid eredményét..');
+    $bot->typesAndWaits(5);
+    $bot->reply(
+        'http://kresz.bot/statisztika/' . $user->getId() . PHP_EOL .
+        'Felhasználó (ID): ' . $user->getId() . PHP_EOL .
+        'Jelszavad: ' . rand(1000,9999)
+    );
+
+    $user = $bot->getUser(); //User
+
+    return $bot->reply(ButtonTemplate::create(
+        'Az alábbi gombra kattintva azonnal beléphetsz:')
+        ->addButton(ElementButton::create('Mutasd!')
+            ->url('http://kresz.bot/statisztika/'.$user->getId())
+        )
+    );
 });

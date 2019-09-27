@@ -35,4 +35,36 @@ class HomeController extends Controller
             'stats' => $stats
         ]);
     }
+
+    /**
+     * Show stats.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function stats($userId)
+    {
+        $user = DB::table('bot_users')->select('*')->where('BotUserID', $userId)->first();
+        $tests = DB::table('tests')->select('*')->where('BotUserID', $userId)->get();
+        
+        return view('stats', [
+            'user' => $user,
+            'tests' => $tests,
+            'userId' => $userId
+        ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile($userId)
+    {
+        $user = DB::table('bot_users')->select('*')->where('BotUserID', $userId)->first();
+
+        return view('profile', [
+            'user' => $user,
+            'userId' => $userId
+        ]);
+    }
 }

@@ -14,13 +14,13 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
+            <p class="login-box-msg">Kérlek jelentkezz be a folytatáshoz</p>
             <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                           placeholder="{{ trans('adminlte::adminlte.email') }}">
+                           placeholder="Azonosító (ID)">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
-                           placeholder="{{ trans('adminlte::adminlte.password') }}">
+                           placeholder="Jelszó">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
                         <span class="help-block">
@@ -39,27 +39,27 @@
                     @endif
                 </div>
                 <div class="row">
-                    <div class="col-xs-8">
+                    <!--<div class="col-xs-8">
                         <div class="icheck-primary">
                             <input type="checkbox" name="remember" id="remember">
                             <label for="remember">{{ trans('adminlte::adminlte.remember_me') }}</label>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- /.col -->
-                    <div class="col-xs-4">
+                    <div class="col-xs-12">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">
-                            {{ trans('adminlte::adminlte.sign_in') }}
+                            Belépés
                         </button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
             <br>
-            <p>
+            <!--<p>
                 <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}" class="text-center">
-                    {{ trans('adminlte::adminlte.i_forgot_my_password') }}
+                    Nem tudok bejelentkezni :(
                 </a>
-            </p>
+            </p>-->
             @if (config('adminlte.register_url', 'register'))
                 <p>
                     <a href="{{ url(config('adminlte.register_url', 'register')) }}" class="text-center">
