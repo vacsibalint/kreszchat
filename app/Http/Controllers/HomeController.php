@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->userData = auth()->user();
     }
 
     /**
@@ -61,9 +62,12 @@ class HomeController extends Controller
     public function profile($userId)
     {
         $user = DB::table('bot_users')->select('*')->where('BotUserID', $userId)->first();
+        $tests = DB::table('tests')->select('*')->where('BotUserID', $userId)->orderBy('createdAt', 'desc')->take(3)->get();
 
+        var_dump($this->userData); die;
         return view('profile', [
             'user' => $user,
+            'tests' => $tests,
             'userId' => $userId
         ]);
     }
